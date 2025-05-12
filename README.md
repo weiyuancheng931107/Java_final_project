@@ -1,93 +1,164 @@
-# Java Music Application
 
-Java Music Application is a Java-based application designed for various music-related functionalities, including creating, processing, and manipulating MIDI files, generating rhythms, and defining musical styles.
+# Java Music Application (Web-Based)
 
-## The structure of the project
+Java Music Application is a Java-based backend application designed for various music-related functionalities, including creating, processing, and manipulating MIDI files, generating rhythms, and defining musical styles. The frontend has been transitioned from Java Swing to a modern **web-based interface**, allowing users to interact via browsers.
+
+---
+
+## Project Structure
 
 The structure and functionalities of the project are described below. There are a few architectural design principles in this project:
 
-* All classes follow the principles of object-oriented programming.
-* Builder classes are used for creating complex objects.
-* The project makes extensive use of Java standard libraries.
+- All classes follow the principles of object-oriented programming.
+- Builder classes are used for creating complex objects.
+- The project makes extensive use of Java standard libraries and MIDI support.
 
-### Files and Their Functions
+---
 
-#### Note.java
-This class is responsible for classifying the note.
+## Files and Their Functions
 
-#### Chord.java
-This class handles chord-related operations, such as creating chords. It includes methods to define chord structures and to generate chord sequences.
+### Core Music Processing Classes
 
-#### DefineStyle.java
-This class allows users to define and apply different musical styles to MIDI sequences. It includes functionality to merge MIDI files according to specified styles.
+- **Note.java**  
+  This class is responsible for classifying and representing musical notes.
 
-#### Judge.java
-This class evaluates musical sequences by analyzing their structure and rhythm. It is used to ensure the sequences adhere to certain musical standards or styles.
+- **Chord.java**  
+  Handles chord-related operations, such as creating chords and defining chord structures.
 
-#### Metronome.java
-It includes methods to set the tempo and possibly to customize the sound of the beat.
+- **DefineStyle.java**  
+  Allows users to define and apply different musical styles to MIDI sequences, and merge files accordingly.
 
-#### MetronomeWithNoPitch.java
-Similar to Metronome.java, but this version likely focuses on a metronome with no pitch, providing just a percussive beat without any tonal elements.
+- **Judge.java**  
+  Evaluates musical sequences by analyzing their structure and rhythm to meet predefined styles.
 
-#### MidiGenerator.java
-This class is responsible for generating MIDI sequences based on given parameters such as tempo, note sequences, and rhythms. It includes methods to play and save these sequences.
+- **Metronome.java**  
+  Provides tempo control with audible beat (with pitch).
 
-#### MidiMerger.java
-This class provides functionality to merge multiple MIDI files into one. It includes methods to handle conflicts and ensure the merged file maintains musical coherence.
+- **MetronomeWithNoPitch.java**  
+  Similar to `Metronome`, but outputs beat without pitch, acting like a percussion click.
 
-#### ReadSheet.java
-This class reads musical notations from a file and converts them into a format that can be used by other classes in the application. It includes methods to parse musical notes and rhythms from textual representations.
+- **MidiGenerator.java**  
+  Responsible for generating and playing MIDI sequences based on tempo, rhythms, and note data.
 
-#### Drumsound.java
-This class contains programs of every piece in the drum kit.
+- **MidiMerger.java**  
+  Merges multiple MIDI files while maintaining musical coherence and resolving overlaps.
 
-#### Funk.java
-This class is responsible for generating Funk rhythms. It includes methods for defining the specific patterns and time signatures characteristic of Funk music.
+- **ReadSheet.java**  
+  Reads textual or file-based musical notation input and parses it into MIDI-compatible sequences.
 
-#### Jazz.java
-This class is responsible for generating Jazz rhythms. It includes methods for defining the specific patterns and time signatures characteristic of Jazz music.
+- **Drumsound.java**  
+  Defines individual drum sounds used across rhythm styles.
 
-#### BossaNova.java
-This class is responsible for generating Bossa Nova rhythms. It includes methods for defining the specific patterns and time signatures characteristic of Bossa Nova music.
+---
 
-#### Reggae.java
-This class is responsible for generating Reggae rhythms. It includes methods for defining the specific patterns and time signatures characteristic of Reggae music.
+### Rhythm Style Classes
 
-#### RnB.java
-This class is responsible for generating RnB rhythms. It includes methods for defining the specific patterns and time signatures characteristic of RnB music.
+Each of the following classes is responsible for generating its respective rhythm using distinct patterns and time signatures:
 
-#### Rock.java
-This class is responsible for generating Rock rhythms. It includes methods for defining the specific patterns and time signatures characteristic of Rock music.
+- **Funk.java**
+- **Jazz.java**
+- **BossaNova.java**
+- **Reggae.java**
+- **RnB.java**
+- **Rock.java**
+- **Soul.java**
 
-#### Soul.java
-This class is responsible for generating Soul rhythms. It includes methods for defining the specific patterns and time signatures characteristic of Soul music.
+---
 
-#### MusicApp.java
-This class serves as the main entry point of the application. It initializes the application and manages the user interface components.
+### Web-Adapted GUI Components
 
-#### MusicNotation.java
-This class handles the creation, manipulation, and display of musical notations within the application.
+> 🧭 Originally developed in Swing, now migrated to a web frontend.
 
-#### MusicNotations.java
-This class extends the functionality of MusicNotation.java to support multiple notations simultaneously, allowing for more complex compositions.
+- **MusicApp.java**  
+  Serves as the backend's main entry point. It initializes core music logic and exposes endpoints to the frontend via a web API (e.g., using Spring Boot or a lightweight HTTP server).
 
-#### Notes.java
-This class provides the core functionality for representing and manipulating individual musical notes. It includes methods for note properties such as pitch, duration, and intensity.
+- **PianoPanel.java**  
+  Provides a visual and interactive piano keyboard. In the web version, this is implemented using HTML/CSS with JavaScript (e.g., WebAudio or Tone.js).
 
-#### PianoPanel.java
-This class is responsible for creating a visual representation of a piano keyboard. It allows users to interact with the piano and visualize the notes being played.
+- **MusicNotation.java**  
+  Handles the backend logic for creating and managing a single musical notation.
 
-### Building the project
-To build the project, use your preferred Java IDE (e.g., IntelliJ IDEA, Eclipse) to import the project files. Ensure you have the necessary Java Development Kit (JDK) installed. Follow your IDE's instructions to compile and run the project.
+- **MusicNotations.java**  
+  Extends `MusicNotation` to support multi-notation compositions.
+
+- **Notes.java**  
+  Represents individual note objects, their pitch, duration, and intensity.
+
+---
+
+## Web-Based Frontend
+
+The GUI has been transitioned from Java Swing to a modern web application stack. The frontend allows users to:
+
+- Play piano notes via UI
+- View and edit music notations interactively
+- Choose musical styles
+- Generate and export MIDI
+
+### Technologies Used
+
+- **Frontend Framework**: React (or Vue/Svelte as preferred)
+- **UI Rendering**: HTML5 + CSS3
+- **Music Notation**: VexFlow or ABCjs
+- **MIDI Playback & Audio**: Web Audio API / Tone.js
+- **Communication with Backend**: RESTful API (e.g., /api/generate, /api/style/funk)
+
+---
+
+## Building the Project
+
+### Backend Setup (Java)
+
+1. Install JDK 17+  
+2. Compile the backend:
+   javac -d out src/com/musicapp/*.java
+3. (Optional) Run with a web server (e.g., Spring Boot or NanoHTTPD)
+
+### Frontend Setup (Web)
+
+1. Install Node.js
+2. Navigate to frontend/ directory
+3. Run:
+   npm install
+   npm start
+
+> Ensure frontend/src/api/config.js points to http://localhost:8080/api or your Java backend.
+
+---
 
 ## Contributing
-Contributions to the Java Music Application are welcome. To contribute, please fork the repository, make your changes, and submit a pull request. Ensure that your code follows the project's coding standards and includes appropriate tests.
+
+Contributions to the Java Music Application are welcome. To contribute:
+
+1. Fork the repository
+2. Create a new branch (git checkout -b feature-X)
+3. Commit your changes
+4. Push to your fork
+5. Create a pull request
+
+Please follow OOP principles, add comments, and include test cases or UI demos if relevant.
+
+---
 
 ## Built With
-Java Standard Libraries
-MIDI Libraries for Java (e.g., javax.sound.midi)
+
+- Java Standard Libraries
+- javax.sound.midi
+- Node.js / npm
+- React / HTML / CSS
+- Tone.js / VexFlow
+- RESTful APIs
+
+---
 
 ## Versioning
-We use Semantic Versioning for versioning. For the [versions](https://semver.org/) available, see the tags on this repository.
 
+We use Semantic Versioning. Check repository tags for available versions.
+
+---
+
+## Contact
+
+For feedback, bug reports, or collaboration:
+
+📧 ankeng40426@gmail.com
